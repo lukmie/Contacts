@@ -2,9 +2,7 @@ package com.lumie.contact.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "contacts")
@@ -26,7 +24,7 @@ public class Contact {
     @Column(name = "phone_number")
     private String phoneNumber;
     @ManyToMany(mappedBy = "contacts")
-    private Set<Tag> tags = new HashSet<>();
+    private List<Tag> tags = new ArrayList<>();
 
     public Contact() {
     }
@@ -71,11 +69,11 @@ public class Contact {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Tag> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 

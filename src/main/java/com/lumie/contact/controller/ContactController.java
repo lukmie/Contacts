@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/contacts")
@@ -20,7 +22,10 @@ public class ContactController {
     @GetMapping("/list")
     public String showAllContacts(Model theModel) {
         List<Contact> contactList = contactService.getContacts();
-        theModel.addAttribute("contacts", contactList);
+        theModel.addAttribute("contacts", contactList
+                .stream()
+                .sorted(Comparator.comparing(Contact::getLastName))
+                .collect(Collectors.toList()));
         return "contact-list";
     }
 
