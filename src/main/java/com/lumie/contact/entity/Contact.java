@@ -1,5 +1,7 @@
 package com.lumie.contact.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -23,8 +25,17 @@ public class Contact {
     @NotNull
     @Column(name = "phone_number")
     private String phoneNumber;
-    @ManyToMany(mappedBy = "contacts")
+
+    @ManyToMany(mappedBy = "contacts",fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH})
     private List<Tag> tags = new ArrayList<>();
+
+//    @ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+//            CascadeType.DETACH, CascadeType.REFRESH})
+//    @JoinTable(name = "contact_tag",
+//            joinColumns = { @JoinColumn(name = "contact_id", referencedColumnName = "id_contact") },
+//            inverseJoinColumns = { @JoinColumn(name = "tag_id", referencedColumnName = "id_tag") })
+//    private List<Tag> tags = new ArrayList<>();
 
     public Contact() {
     }
@@ -75,6 +86,16 @@ public class Contact {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public void removeTag() {
+
+        for (Tag tag : tags) {
+//            tag.removeContact(this);
+            tag.getContacts().remove(this);
+        }
+
+//        tags.forEach(c -> c.setContacts(Collections.emptyList()));
     }
 
     @Override

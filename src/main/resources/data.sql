@@ -5,12 +5,14 @@ INSERT INTO contacts (id_contact, first_name, last_name, email, phone_number) VA
   (4, 'Arya', 'Stark', 'arya.stark@gmail.com', '323-665-782');
 
 INSERT INTO tags (id_tag, tag_name) VALUES
-  (1, 'HOME'),
+  (1, 'WORK'),
   (2, 'STUDIES'),
-  (3, 'FAMILY');
+  (3, 'FAMILY'),
+  (4, 'HIGH_SCHOOL');
 
 INSERT INTO contact_tag (tag_id, contact_id) VALUES
-  (1, 1);
---   (2, 2),
---   (3, 3),
---   (4, 4);
+  (1, 1),
+  (2, 1),
+  (2, 2),
+  (3, 2),
+  (3, 3);
