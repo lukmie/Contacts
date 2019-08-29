@@ -29,7 +29,7 @@ public class ContactController {
         return "contact-list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/addContact")
     public String addNewContactForm(Model theModel) {
         Contact theContact = new Contact();
         theModel.addAttribute("contact", theContact);
