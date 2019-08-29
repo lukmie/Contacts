@@ -1,16 +1,13 @@
 package com.lumie.contact.service;
 
 import com.lumie.contact.entity.Contact;
-import com.lumie.contact.entity.Tag;
 import com.lumie.contact.exception.ContactNotFoundException;
 import com.lumie.contact.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -40,12 +37,10 @@ public class ContactServiceImpl implements ContactService {
     @Override
     @Transactional
     public void deleteContact(Long theId) throws ContactNotFoundException {
-        if (contactRepository.findById(theId).get() == null){
-            throw new ContactNotFoundException("Contact with id: " + theId + " does not exist.");
-        }
-        Optional<Contact> contact = contactRepository.findById(theId);
-        contact.get().removeTag();
-        contactRepository.delete(contact.get());
+        Contact contact = contactRepository.findById(theId)
+                .orElseThrow(() -> new ContactNotFoundException("Contact with id: " + theId + " does not exist."));
+        contact.removeTag();
+        contactRepository.delete(contact);
     }
 
     @Override
