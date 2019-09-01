@@ -3,3 +3,10 @@
     padding: 0;
 }
 
+.left {
+    background-color: aqua;
+}
+
+.right {
+    background-color: red;
+}

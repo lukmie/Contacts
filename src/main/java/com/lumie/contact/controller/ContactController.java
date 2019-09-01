@@ -47,7 +47,6 @@ public class ContactController {
     public String saveContact(@ModelAttribute("contact") Contact theContact) {
         contactService.saveContact(theContact);
         return "redirect:/contacts/list";
-//        return "redirect:contact-list";
     }
 
     @GetMapping("/deleteContact")
@@ -57,14 +56,14 @@ public class ContactController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam("firstName") String theFirstName, Model theModel) {
-        if (theFirstName.trim().isEmpty()) {
+    public String search(@RequestParam("firstName") String firstName, Model theModel) {
+        if (firstName.trim().isEmpty()) {
             return "redirect:/contacts/list";
         } else {
-            List<Contact> theEmployees =
-                    contactService.searchBy(theFirstName);
-            theModel.addAttribute("contacts", theEmployees);
-            return "contact-list2";
+            List<Contact> contacts =
+                    contactService.searchBy(firstName);
+            theModel.addAttribute("contacts", contacts);
+            return "contact-list";
         }
     }
 
