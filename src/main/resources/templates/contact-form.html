@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,92 +13,56 @@
     <title>Contacts</title>
 </head>
 <body>
-
-<nav class="navbar navbar-dark fixed-top bg-dark  flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 p-2 mr-0 text-center" style="color: #f8f9fa; font-size: 22px"
-       th:href="@{/contacts/list}" href="#">Cont@cts</a>
-    <div class="navbar-nav col-sm-3 col-md-2 pl-4 mr-auto" style="color: #f8f9fa; font-size: 22px">New contact</div>
-    <!--<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">-->
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
-        </li>
-    </ul>
-</nav>
-
-
-
-<main>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" th:href="@{addContact}">
-                                <span data-feather="home"></span>
-                                Add contact
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span data-feather="file"></span>
-                                Main page
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <div>
-                    <div class="color1">
-                        <!--<p class="h5 pt-4 mb-4">New Contact</p>-->
-                        <div>
-                            <form actio="#" th:action="@{/contacts/saveContact}" method="post" th:object="${contact}">
-                                <input type="hidden" th:field="*{id}"/>
-                                <input type="text" th:field="*{firstName}" class="form-control mt-4 mb-4 col-4" placeholder="First Name"
-                                       required="true"/>
-                                <input type="text" th:field="*{lastName}" class="form-control mt-4 mb-4 col-4" placeholder="Last Name"
-                                       required="true"/>
-                                <input type="email" th:field="*{email}" class="form-control mt-4 mb-4 col-4" placeholder="Email"
-                                       required="true"/>
-                                <input type="text" th:field="*{phoneNumber}" class="form-control mt-4 mb-4 col-4" placeholder="Phone Number"
-                                       required="true"/>
-                                <!--<hr/>-->
-                                <input type="submit" class="btn btn-outline-secondary col-2 mb-1" value="Save"/>
-                            </form>
-                        </div>
+    <nav class="navbar navbar-dark fixed-top bg-dark  flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 p-2 mr-0 text-center" style="color: #f8f9fa; font-size: 22px" th:href="@{/contacts/list}" href="#">Cont@cts</a>
+        <div class="navbar-nav col-sm-3 col-md-2 pl-4 mr-auto" style="color: #f8f9fa; font-size: 22px" th:text="${view}">New contact</div>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" th:href="@{addContact}">
+                                    <span data-feather="home"></span>
+                                    Add contact
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file"></span>
+                                    Main page
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-            </main>
+                </nav>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div>
+                        <form actio="#" th:action="@{/contacts/saveContact}" method="post" th:object="${contact}">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="text" th:field="*{firstName}" class="form-control mt-4 mb-4 col-4" placeholder="First Name"
+                                   required="true"/>
+                            <input type="text" th:field="*{lastName}" class="form-control mt-4 mb-4 col-4" placeholder="Last Name"
+                                   required="true"/>
+                            <input type="email" th:field="*{email}" class="form-control mt-4 mb-4 col-4" placeholder="Email"
+                                   required="true"/>
+                            <input type="text" th:field="*{phoneNumber}" class="form-control mt-4 mb-4 col-4" placeholder="Phone Number"
+                                   required="true"/>
+                            <input type="submit" class="btn btn-outline-secondary col-2 mb-1" value="Save"/>
+                        </form>
+                    </div>
+                </main>
 
+            </div>
         </div>
-    </div>
-</main>
-
-
-<!--<main>-->
-    <!--<div class="container">-->
-        <!--&lt;!&ndash;<hr/>&ndash;&gt;-->
-        <!--<p class="h5 pt-4 mb-4">New Contact</p>-->
-        <!--<div>-->
-            <!--<form actio="#" th:action="@{/contacts/saveContact}" method="post" th:object="${contact}">-->
-                <!--<input type="hidden" th:field="*{id}"/>-->
-                <!--<input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name"-->
-                       <!--required="true"/>-->
-                <!--<input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last Name"-->
-                       <!--required="true"/>-->
-                <!--<input type="email" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email"-->
-                       <!--required="true"/>-->
-                <!--<input type="text" th:field="*{phoneNumber}" class="form-control mb-4 col-4" placeholder="Phone Number"-->
-                       <!--required="true"/>-->
-                <!--&lt;!&ndash;<hr/>&ndash;&gt;-->
-                <!--<input type="submit" class="btn btn-outline-info col-2 mb-1" value="Save"/>-->
-            <!--</form>-->
-        <!--</div>-->
-        <!--<a href="list" class="btn btn-outline-info col-2">Back to Contacts</a>-->
-    <!--</div>-->
-<!--</main>-->
+    </main>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

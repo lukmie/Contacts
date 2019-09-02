@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class ContactServiceImpl implements ContactService {
 
-    @Autowired
     private ContactRepository contactRepository;
+
+    @Autowired
+    public ContactServiceImpl(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
 
     @Override
     @Transactional
@@ -44,7 +48,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> searchBy(String theFirstName) {
-        return contactRepository.findByFirstNameContainsAllIgnoreCase(theFirstName);
+    public List<Contact> searchBy(String search) {
+        return contactRepository.findByFirstNameOrLastName(search);
     }
 }

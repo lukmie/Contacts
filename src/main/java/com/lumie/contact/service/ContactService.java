@@ -10,5 +10,5 @@ public interface ContactService {
     Contact getContactById(Long theId) throws ContactNotFoundException;
     void saveContact(Contact theContact);
     void deleteContact(Long theId) throws ContactNotFoundException;
-    List<Contact> searchBy(String theFirstName);
+    List<Contact> searchBy(String search);
 }

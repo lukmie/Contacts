@@ -16,13 +16,32 @@
 
 <nav class="navbar navbar-dark fixed-top bg-dark  flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 p-2 mr-0 text-center" style="color: #f8f9fa; font-size: 22px" th:href="@{/contacts/list}" href="#">Cont@cts</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+
+    <form action="#" th:action="@{search}" method="get" class="input-group">
+        <input class="form-control form-control-dark" type="text" placeholder="Search" name="search" aria-label="Search">
+        <div class="input-group-append">
+            <button class="btn btn-outline-light" value="Search">Search</button>
+        </div>
+    </form>
+
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="#">Sign out</a>
         </li>
     </ul>
 </nav>
+
+
+
+<!--<form action="#" th:action="@{search}" method="get">-->
+    <!--<div class="input-group input-group-sm mt-3">-->
+        <!--<div class="input-group-prepend">-->
+            <!--<button class="btn btn-outline-info" value="Search">Search</button>-->
+        <!--</div>-->
+        <!--<input type="search" name="firstName" placeholder="First Name" class="form-control" aria-describedby="inputGroup-sizing-sm">-->
+    <!--</div>-->
+<!--</form>-->
+
 
 
 <main>
@@ -38,7 +57,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" th:href="@{/contacts/list}">
                                 <span data-feather="file"></span>
                                 Main page
                             </a>
@@ -92,7 +111,8 @@
                     <!--</div>-->
                     <!--</form>-->
 
-                    <div class="color1">
+
+                    <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                             <tr>
@@ -105,30 +125,28 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="contact: ${contacts}" th:object="${contact}">
-                                <td th:text="*{firstName}">John</td>
-                                <td th:text="*{lastName}">Snow</td>
-                                <td th:text="*{email}">john.snow@gmail.com</td>
-                                <td th:text="*{phoneNumber}">798-355-244</td>
-                                <td>
+                            <tr th:each="contact: ${contacts}" th:object="${contact}" >
+                                <td th:text="*{firstName}" class="pt-3">John</td>
+                                <td th:text="*{lastName}"  class="pt-3">Snow</td>
+                                <td th:text="*{email}"  class="pt-3">john.snow@gmail.com</td>
+                                <td th:text="*{phoneNumber}"  class="pt-3">798-355-244</td>
+                                <td  class="pt-3">
                                     <a th:each="s: ${contact.tags}" href="${updateLink}" th:text="${s.tagName}" class="btn btn-outline-secondary btn-sm">Edit</a>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center pt-3">
                                     <a href="#" th:href="@{updateContact/(theId=${contact.id})}" class="btn btn-outline-primary btn-sm">Edit</a>
                                     <a href="#" th:href="@{deleteContact/(theId=${contact.id})}" class="btn btn-outline-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false">Delete</a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                        <!--<a href="#" th:href="@{addContact}" class="btn btn-outline-info col-2 mb-3">Add contact</a>-->
                     </div>
-
                 </div>
             </main>
-
         </div>
     </div>
 </main>
+
 
 
 

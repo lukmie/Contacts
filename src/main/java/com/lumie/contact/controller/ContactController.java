@@ -2,6 +2,7 @@ package com.lumie.contact.controller;
 
 import com.lumie.contact.entity.Contact;
 import com.lumie.contact.exception.ContactNotFoundException;
+import com.lumie.contact.repository.TagRepository;
 import com.lumie.contact.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/contacts")
 public class ContactController {
 
-    @Autowired
     private ContactService contactService;
+
+    @Autowired
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
+    }
 
     @GetMapping("/list")
     public String showAllContacts(Model theModel) {
@@ -33,6 +38,7 @@ public class ContactController {
     public String addNewContactForm(Model theModel) {
         Contact theContact = new Contact();
         theModel.addAttribute("contact", theContact);
+        theModel.addAttribute("view", "Add contact");
         return "contact-form";
     }
 
@@ -40,6 +46,7 @@ public class ContactController {
     public String updateContactForm(@RequestParam("theId") Long theId, Model theModel) throws ContactNotFoundException {
         Contact theContact = contactService.getContactById(theId);
         theModel.addAttribute("contact", theContact);
+        theModel.addAttribute("view", "Update contact");
         return "contact-form";
     }
 
@@ -56,12 +63,12 @@ public class ContactController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam("firstName") String firstName, Model theModel) {
-        if (firstName.trim().isEmpty()) {
+    public String search(@RequestParam(name = "search") String search, Model theModel) {
+        if (search.trim().isEmpty()) {
             return "redirect:/contacts/list";
         } else {
-            List<Contact> contacts =
-                    contactService.searchBy(firstName);
+//            List<Contact> contacts = contactService.searchBy(firstName);
+            List<Contact> contacts = contactService.searchBy(search);
             theModel.addAttribute("contacts", contacts);
             return "contact-list";
         }
