@@ -82,11 +82,11 @@
                         <!--</ul>-->
                     <!--</div>-->
 
-                    <ul class="nav flex-column mb-2">
+                    <ul th:each="tag: ${tags}" th:object="${tag}" th:remove="all-but-first" class="nav flex-column mb-2">
                         <li class="nav-item">
                             <p class="nav-link m-0 pt-1 pb-1">
                                 <span data-feather="file-text"></span>
-                                <a href="${updateLink}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                                <a href="#" th:href="@{/contacts/list(tag=*{tagName})}" th:text="*{tagName}" class="btn btn-outline-secondary btn-sm">Edit</a>
                             </p>
                         </li>
                         <li class="nav-item">
@@ -131,7 +131,7 @@
                                 <td th:text="*{email}"  class="pt-3">john.snow@gmail.com</td>
                                 <td th:text="*{phoneNumber}"  class="pt-3">798-355-244</td>
                                 <td  class="pt-3">
-                                    <a th:each="s: ${contact.tags}" href="${updateLink}" th:text="${s.tagName}" class="btn btn-outline-secondary btn-sm">Edit</a>
+                                    <a th:each="s: ${contact.tags}" href="#" th:href="@{/contacts/list(tag=${s.tagName})}" th:text="${s.tagName}" class="btn btn-outline-secondary btn-sm">Edit</a>
                                 </td>
                                 <td class="text-center pt-3">
                                     <a href="#" th:href="@{updateContact/(theId=${contact.id})}" class="btn btn-outline-primary btn-sm">Edit</a>

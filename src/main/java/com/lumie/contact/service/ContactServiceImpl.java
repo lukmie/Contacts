@@ -49,6 +49,6 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contact> searchBy(String search) {
-        return contactRepository.findByFirstNameOrLastName(search);
+        return contactRepository.findAllByFirstNameOrLastName(search);
     }
 }

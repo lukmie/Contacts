@@ -1,14 +1,17 @@
 package com.lumie.contact.controller;
 
 import com.lumie.contact.entity.Contact;
+import com.lumie.contact.entity.Tag;
 import com.lumie.contact.exception.ContactNotFoundException;
-import com.lumie.contact.repository.TagRepository;
 import com.lumie.contact.service.ContactService;
+import com.lumie.contact.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,27 +21,36 @@ import java.util.stream.Collectors;
 public class ContactController {
 
     private ContactService contactService;
+    private TagService tagService;
 
     @Autowired
-    public ContactController(ContactService contactService) {
+    public ContactController(ContactService contactService, TagService tagService) {
         this.contactService = contactService;
+        this.tagService = tagService;
     }
 
     @GetMapping("/list")
-    public String showAllContacts(Model theModel) {
-        List<Contact> contactList = contactService.getContacts();
-        theModel.addAttribute("contacts", contactList
+    public String showAllContacts(@RequestParam(required = false) String tag, Model model) {
+        List<Contact> contactList;
+        if (tag == null) {
+            contactList = contactService.getContacts();
+        } else {
+            contactList = tagService.getTagsByTagName(tag);
+        }
+        model.addAttribute("contacts", contactList
                 .stream()
                 .sorted(Comparator.comparing(Contact::getLastName))
                 .collect(Collectors.toList()));
+        List<Tag> tagList = tagService.getTags();
+        model.addAttribute("tags", tagList);
         return "contact-list";
     }
 
     @GetMapping("/addContact")
-    public String addNewContactForm(Model theModel) {
+    public String addNewContactForm(Model model) {
         Contact theContact = new Contact();
-        theModel.addAttribute("contact", theContact);
-        theModel.addAttribute("view", "Add contact");
+        model.addAttribute("contact", theContact);
+        model.addAttribute("view", "Add contact");
         return "contact-form";
     }
 
