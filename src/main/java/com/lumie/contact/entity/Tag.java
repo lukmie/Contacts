@@ -1,7 +1,5 @@
 package com.lumie.contact.entity;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +17,12 @@ public class Tag {
     private String tagName;
 
 
-    @ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "contact_tag",
-            joinColumns = { @JoinColumn(name = "tag_id", referencedColumnName = "id_tag") },
-            inverseJoinColumns = { @JoinColumn(name = "contact_id", referencedColumnName = "id_contact") })
+            joinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id_tag")},
+            inverseJoinColumns = {@JoinColumn(name = "contact_id", referencedColumnName = "id_contact")})
     private List<Contact> contacts = new ArrayList<>();
-
 
 //    @ManyToMany(mappedBy = "tags",fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 //            CascadeType.DETACH, CascadeType.REFRESH})
