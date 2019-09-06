@@ -16,3 +16,6 @@ INSERT INTO contact_tag (tag_id, contact_id) VALUES
   (2, 2),
   (3, 2),
   (3, 3);
+
+INSERT INTO usersroles (id_role, name) VALUES
+  (1, 'ROLE_USER');

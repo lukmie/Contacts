@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity()
+@Entity
 @Table(name = "users")
 public class User {
 
@@ -24,8 +24,8 @@ public class User {
     private String password;
     @Column(name = "email")
     private String email;
-    @Column(name = "birth_date")
-    private Date birthDate;
+//    @Column(name = "birth_date")
+//    private Date birthDate;
     @Column(name = "pesel")
     private String pesel;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -85,13 +85,13 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+//    public Date getBirthDate() {
+//        return birthDate;
+//    }
+//
+//    public void setBirthDate(Date birthDate) {
+//        this.birthDate = birthDate;
+//    }
 
     public String getPesel() {
         return pesel;
@@ -120,14 +120,14 @@ public class User {
                 Objects.equals(login, user.login) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(email, user.email) &&
-                Objects.equals(birthDate, user.birthDate) &&
+//                Objects.equals(birthDate, user.birthDate) &&
                 Objects.equals(pesel, user.pesel) &&
                 Objects.equals(userRoles, user.userRoles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, login, password, email, birthDate, pesel, userRoles);
+        return Objects.hash(id, firstName, lastName, login, password, email, pesel, userRoles);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", birthDate=" + birthDate +
+//                ", birthDate=" + birthDate +
                 ", pesel='" + pesel + '\'' +
                 ", userRoles=" + userRoles +
                 '}';
