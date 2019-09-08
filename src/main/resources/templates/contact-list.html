@@ -133,9 +133,15 @@
                                 <td  class="pt-3">
                                     <a th:each="s: ${contact.tags}" href="#" th:href="@{/contacts/list(tag=${s.tagName})}" th:text="${s.tagName}" class="btn btn-outline-secondary btn-sm">Edit</a>
                                 </td>
-                                <td class="text-center pt-3">
-                                    <a href="#" th:href="@{updateContact/(theId=${contact.id})}" class="btn btn-outline-primary btn-sm">Edit</a>
-                                    <a href="#" th:href="@{deleteContact/(theId=${contact.id})}" class="btn btn-outline-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false">Delete</a>
+                                <td class="d-flex justify-content-center">
+                                    <!--<a href="#" th:href="@{updateContact/(theId=${contact.id})}" class="btn btn-outline-primary btn-sm">Edit</a>-->
+                                    <form th:action="@{|updateContact/${contact.id}|}" method="get">
+                                        <button type="submit" class="btn btn-outline-primary btn-sm">Edit</button>
+                                    </form>
+                                    <form th:action="@{|deleteContact/${contact.id}|}" method="post">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false">Delete</button>
+                                    </form>
+                                    <!--<a href="#" th:href="@{deleteContact/(theId=${contact.id})}" class="btn btn-outline-danger btn-sm" onclick="if (!(confirm('Are you sure you want to delete this contact?'))) return false">Delete</a>-->
                                 </td>
                             </tr>
                             </tbody>

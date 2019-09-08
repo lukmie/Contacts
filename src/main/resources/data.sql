@@ -19,3 +19,6 @@ INSERT INTO contact_tag (tag_id, contact_id) VALUES
 
 INSERT INTO usersroles (id_role, name) VALUES
   (1, 'ROLE_USER');
+
+INSERT INTO users (id_user, first_name, last_name, login, password, email, pesel) VALUES
+  (1, 'Jan', 'Nowak', 'jan', '$2a$10$aKkykQ/TaABhZUMcVPdD3uJrnT7Ep0dnL9SgGfXXOPtcJOta2Altm', 'jnowak@gmail.com', '91011203366');

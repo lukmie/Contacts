@@ -54,34 +54,34 @@ public class ContactController {
         return "contact-form";
     }
 
-    @GetMapping("/updateContact")
-    public String updateContactForm(@RequestParam("theId") Long theId, Model theModel) throws ContactNotFoundException {
-        Contact theContact = contactService.getContactById(theId);
+    @GetMapping("/updateContact/{id}")
+    public String updateContactForm(@PathVariable("id") Long id, Model theModel) throws ContactNotFoundException {
+        Contact theContact = contactService.getContactById(id);
         theModel.addAttribute("contact", theContact);
         theModel.addAttribute("view", "Update contact");
         return "contact-form";
     }
 
     @PostMapping("/saveContact")
-    public String saveContact(@ModelAttribute("contact") Contact theContact) {
-        contactService.saveContact(theContact);
+    public String saveContact(@ModelAttribute("contact") Contact contact) {
+        contactService.saveContact(contact);
         return "redirect:/contacts/list";
     }
 
-    @GetMapping("/deleteContact")
-    public String deleteContact(@RequestParam("theId") Long theId) throws ContactNotFoundException {
-        contactService.deleteContact(theId);
+    @PostMapping("/deleteContact/{id}")
+    public String deleteContact(@PathVariable("id") Long id) throws ContactNotFoundException {
+        contactService.deleteContact(id);
         return "redirect:/contacts/list";
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam(name = "search") String search, Model theModel) {
+    public String search(@RequestParam(name = "search") String search, Model model) {
         if (search.trim().isEmpty()) {
             return "redirect:/contacts/list";
         } else {
 //            List<Contact> contacts = contactService.searchBy(firstName);
             List<Contact> contacts = contactService.searchBy(search);
-            theModel.addAttribute("contacts", contacts);
+            model.addAttribute("contacts", contacts);
             return "contact-list";
         }
     }
