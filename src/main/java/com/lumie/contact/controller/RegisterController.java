@@ -51,7 +51,7 @@ public class RegisterController {
             return "register-form";
         else {
             userService.addUser(userDto);
-            return "redirect:/login-form";
+            return "redirect:/loginform";
         }
     }
 

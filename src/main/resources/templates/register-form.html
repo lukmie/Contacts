@@ -1,29 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-	<!-- Required meta tags -->
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
-	<!-- Bootstrap CSS -->
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
-	<link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
+	<!--<link href="../static/css/signin.css" th:href="@{/css/signin.css}" rel="stylesheet">-->
 	<title>Contacts</title>
 </head>
 <body>
-	<h1>Registration form</h1>
-	<form action="#" method="post" th:action="@{/register}" th:object="${user}">
-		<p>First name: <input type="text" th:field="*{firstName}" placeholder="First Name" /></p>
-		<p>Last name: <input type="text" th:field="*{lastName}" placeholder="Last Name" /></p>
-		<!--<p th:errors="*{email}">Email errors</p>-->
-		<p>Email: <input type="email" th:field="*{email}" placeholder="Email" /></p>
-		<p>Pesel: <input type="text" th:field="*{pesel}" placeholder="Pesel" /></p>
-		<!--<p th:errors="*{password}">Password errors</p>-->
-		<p>Login: <input type="text" th:field="*{login}" placeholder="Login" /></p>
-		<p>Password: <input type="password"  th:field="*{password}" placeholder="Password" /></p>
-		<input type="submit" value="Register" />
-	</form>
+	<div class="container mt-5">
+		<div class="offset-md-4 col-sm-4">
+			<div class="text-center">
+				<form class="form-signin" method="post" th:action="@{/register}" th:object="${user}">
+					<h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+					<input type="text" th:field="*{firstName}" class="form-control mb-2" placeholder="First Name" required autofocus>
+					<input type="text" th:field="*{lastName}" class="form-control mb-2" placeholder="Last Name" required autofocus>
+					<input type="email" th:field="*{email}" class="form-control mb-2" placeholder="Email" required autofocus>
+					<input type="text" th:field="*{pesel}" class="form-control mb-2" placeholder="Pesel" required autofocus>
+					<input type="text" th:field="*{login}" class="form-control mb-2" placeholder="Username" required autofocus>
+					<input type="password" th:field="*{password}" class="form-control mb-2" placeholder="Password" required autofocus>
+					<button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Sign up</button>
+					<div class="text-center mt-3">
+						Already have an account? <a href="#" th:href="@{/loginform}">Sign in.</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

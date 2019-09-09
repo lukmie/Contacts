@@ -1,23 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
-    <!-- Bootstrap CSS -->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
-    <link href="../static/css/dashboard.css" th:href="@{/css/dashboard.css}" rel="stylesheet">
+    <!--<link href="../static/css/signin.css" th:href="@{/css/signin.css}" rel="stylesheet">-->
     <title>Contacts</title>
 </head>
 <body>
-<h1>Please Login</h1>
-<form action="#" th:action="@{/processlogin}" method="post">
-    <p>Username: <input type="text" name="username" placeholder="Username" /></p>
-    <p>Password: <input type="password" name="password" placeholder="Password" /></p>
-    <input type="submit" value="Login" />
-</form>
+    <div class="container mt-5">
+        <div class="offset-md-4 col-sm-4">
+            <form class="form-signin" action="#" th:action="@{/processlogin}" method="post">
+                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+                <input type="text" name="username" class="form-control mb-2" placeholder="Username" required autofocus>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Sign in</button>
+                <div class="text-center mt-3">
+                    Don't have an account? <a href="#" th:href="@{/register}">Sign up here.</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
