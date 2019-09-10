@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -34,8 +35,29 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Transactional
-    public void saveContact(Contact theContact) {
-        contactRepository.save(theContact);
+    public void saveContact(Contact contact) throws ContactNotFoundException {
+//        Contact contactRepositoryId = contactRepository.findById(contact.getId()).orElseThrow(() -> new ContactNotFoundException("Error"));
+        contact.addTag();
+        contactRepository.save(contact);
+    }
+
+    @Override
+    @Transactional
+    public void updateContact(Contact contact) throws ContactNotFoundException {
+        Contact contactRepositoryId = contactRepository.findById(contact.getId()).orElseThrow(() -> new ContactNotFoundException("Error"));
+        contactRepositoryId.setFirstName(contact.getFirstName());
+        contactRepositoryId.setLastName(contact.getLastName());
+        contactRepositoryId.setEmail(contact.getEmail());
+        contactRepositoryId.setPhoneNumber(contact.getPhoneNumber());
+        if (!contactRepositoryId.getTags().isEmpty()) {
+            contactRepositoryId.removeTag();
+        }
+        contactRepositoryId.setTags(contact.getTags());
+        contactRepositoryId.setTag(contact.getTag());
+//        System.out.println("iddddddddddddddddddd" + contact.getId());
+//        System.out.println("------------" + contact.getTags());
+        contactRepositoryId.addTag();
+        contactRepository.save(contactRepositoryId);
     }
 
     @Override

@@ -25,6 +25,7 @@ public class Contact {
     @NotNull
     @Column(name = "phone_number")
     private String phoneNumber;
+    private String tag;
 
     @ManyToMany(mappedBy = "contacts",fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
@@ -89,13 +90,29 @@ public class Contact {
     }
 
     public void removeTag() {
-
         for (Tag tag : tags) {
-//            tag.removeContact(this);
             tag.getContacts().remove(this);
         }
+    }
 
-//        tags.forEach(c -> c.setContacts(Collections.emptyList()));
+    public void addTag() {
+//        System.out.println("1------------"+tags);
+//        if (!tags.isEmpty()){
+//            removeTag();
+//        }
+//        System.out.println("2------------"+tags);
+        for (Tag tag : tags) {
+            tag.getContacts().add(this);
+        }
+
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     @Override

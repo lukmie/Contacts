@@ -63,10 +63,28 @@ public class ContactController {
     }
 
     @PostMapping("/saveContact")
-    public String saveContact(@ModelAttribute("contact") Contact contact) {
+    public String saveContact(@ModelAttribute("contact") Contact contact) throws ContactNotFoundException {
+//        System.out.println(contact.getTags());
+//        contact.setTags(contact.getTags());
+        System.out.println(contact.getTag());
         contactService.saveContact(contact);
         return "redirect:/contacts/list";
     }
+
+    @PostMapping("/updateContact")
+    public String updateContact(@ModelAttribute("contact") Contact contact) throws ContactNotFoundException {
+//        System.out.println(contact.getTags());
+//        contact.setTags(contact.getTags());
+        contactService.updateContact(contact);
+        return "redirect:/contacts/list";
+    }
+
+
+
+
+
+
+
 
     @PostMapping("/deleteContact/{id}")
     public String deleteContact(@PathVariable("id") Long id) throws ContactNotFoundException {
