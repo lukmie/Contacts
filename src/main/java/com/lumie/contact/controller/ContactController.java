@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -64,8 +62,6 @@ public class ContactController {
 
     @PostMapping("/saveContact")
     public String saveContact(@ModelAttribute("contact") Contact contact) throws ContactNotFoundException {
-//        System.out.println(contact.getTags());
-//        contact.setTags(contact.getTags());
         System.out.println(contact.getTag());
         contactService.saveContact(contact);
         return "redirect:/contacts/list";
@@ -73,18 +69,9 @@ public class ContactController {
 
     @PostMapping("/updateContact")
     public String updateContact(@ModelAttribute("contact") Contact contact) throws ContactNotFoundException {
-//        System.out.println(contact.getTags());
-//        contact.setTags(contact.getTags());
         contactService.updateContact(contact);
         return "redirect:/contacts/list";
     }
-
-
-
-
-
-
-
 
     @PostMapping("/deleteContact/{id}")
     public String deleteContact(@PathVariable("id") Long id) throws ContactNotFoundException {
@@ -97,12 +84,9 @@ public class ContactController {
         if (search.trim().isEmpty()) {
             return "redirect:/contacts/list";
         } else {
-//            List<Contact> contacts = contactService.searchBy(firstName);
             List<Contact> contacts = contactService.searchBy(search);
             model.addAttribute("contacts", contacts);
             return "contact-list";
         }
     }
-
-
 }

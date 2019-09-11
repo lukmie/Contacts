@@ -49,15 +49,15 @@
                             <form action="#" th:action="@{/contacts/saveContact}" method="post" th:object="${contact}">
                                 <input type="hidden" th:field="*{id}"/>
                                 <input type="text" th:field="*{firstName}" class="form-control mt-4 mb-4 col-4" placeholder="First Name"
-                                       required="true"/>
+                                       required/>
                                 <input type="text" th:field="*{lastName}" class="form-control mt-4 mb-4 col-4" placeholder="Last Name"
-                                       required="true"/>
+                                       required/>
                                 <input type="email" th:field="*{email}" class="form-control mt-4 mb-4 col-4" placeholder="Email"
-                                       required="true"/>
+                                       required/>
                                 <input type="text" th:field="*{phoneNumber}" class="form-control mt-4 mb-4 col-4" placeholder="Phone Number"
-                                       required="true"/>
+                                       required/>
                                 <input type="text" th:field="*{tag}" class="form-control mt-4 mb-4 col-4" placeholder="tag1, tag2..."
-                                       required="true"/>
+                                       required/>
                                 <input type="submit" class="btn btn-outline-secondary col-2 mb-1" value="Save"/>
                             </form>
                         </div>
@@ -66,15 +66,15 @@
                             <form action="#" th:action="@{/contacts/updateContact}" method="post" th:object="${contact}">
                                 <input type="hidden" th:field="*{id}"/>
                                 <input type="text" th:field="*{firstName}" class="form-control mt-4 mb-4 col-4" placeholder="First Name"
-                                       required="true"/>
+                                       required/>
                                 <input type="text" th:field="*{lastName}" class="form-control mt-4 mb-4 col-4" placeholder="Last Name"
-                                       required="true"/>
+                                       required/>
                                 <input type="email" th:field="*{email}" class="form-control mt-4 mb-4 col-4" placeholder="Email"
-                                       required="true"/>
+                                       required/>
                                 <input type="text" th:field="*{phoneNumber}" class="form-control mt-4 mb-4 col-4" placeholder="Phone Number"
-                                       required="true"/>
+                                       required/>
                                 <input type="text" th:field="*{tag}" class="form-control mt-4 mb-4 col-4" placeholder="tag1, tag2..."
-                                       required="true"/>
+                                       required/>
                                 <input type="submit" class="btn btn-outline-secondary col-2 mb-1" value="Update"/>
                             </form>
                         </div>

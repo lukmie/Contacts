@@ -1,7 +1,5 @@
 package com.lumie.contact.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -27,7 +25,7 @@ public class Contact {
     private String phoneNumber;
     private String tag;
 
-    @ManyToMany(mappedBy = "contacts",fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToMany(mappedBy = "contacts",fetch=FetchType.LAZY, cascade= { CascadeType.MERGE, CascadeType.PERSIST,
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<Tag> tags = new ArrayList<>();
 
@@ -120,17 +118,18 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Contact contact = (Contact) o;
-        return id == contact.id &&
+        return Objects.equals(id, contact.id) &&
                 Objects.equals(firstName, contact.firstName) &&
                 Objects.equals(lastName, contact.lastName) &&
                 Objects.equals(email, contact.email) &&
                 Objects.equals(phoneNumber, contact.phoneNumber) &&
+                Objects.equals(tag, contact.tag) &&
                 Objects.equals(tags, contact.tags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, phoneNumber, tags);
+        return Objects.hash(id, firstName, lastName, email, phoneNumber, tag, tags);
     }
 
     @Override

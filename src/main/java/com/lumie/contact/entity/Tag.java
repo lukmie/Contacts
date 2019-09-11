@@ -13,7 +13,7 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tag")
     private Long id;
-    @Column(name = "tag_name")
+    @Column(name = "tag_name", unique = true, length = 26)
     private String tagName;
 
 
