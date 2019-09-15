@@ -56,12 +56,24 @@ public class ContactServiceImpl implements ContactService {
         List<String> uniqueTagList = tagsFromForm.stream()
                 .filter(l -> !tagsFromDB.contains(l))
                 .collect(Collectors.toList());
-//        for (String s : uniqueTagList) {
-//            Tag tag = new Tag();
-//                    tag.setTagName(s);
-////                    contact.getTags().add(tag);
-//            tagRepository.save(tag);
-//        }
+
+        if (!uniqueTagList.isEmpty()) {
+            for (String s : uniqueTagList) {
+                Tag tag = new Tag();
+                tag.setTagName(s);
+                tag.getContacts().add(contact);
+//                    contact.getTags().add(tag);
+                tagRepository.save(tag);
+            }
+        } else {
+            contact.setTags(tagsFromForm.stream().map(t -> {
+            Tag tag1 = new Tag();
+            tag1.setTagName(t.toUpperCase());
+                tag1.getContacts().add(contact);
+            return tag1;
+            }).collect(Collectors.toList()));
+
+        }
 
         tagsFromForm.stream().map(t -> {
             Tag tag1 = new Tag();
@@ -69,13 +81,13 @@ public class ContactServiceImpl implements ContactService {
             return tag1;
         }).collect(Collectors.toList());
 
-        contact.setTags(tagsFromForm.stream().map(t -> {
-            Tag tag1 = new Tag();
-            tag1.setTagName(t.toUpperCase());
-            return tag1;
-        }).collect(Collectors.toList()));
+//        contact.setTags(tagsFromForm.stream().map(t -> {
+//            Tag tag1 = new Tag();
+//            tag1.setTagName(t.toUpperCase());
+//            return tag1;
+//        }).collect(Collectors.toList()));
 
-        contact.addTag();
+//        contact.addTag();
         contactRepository.save(contact);
     }
 

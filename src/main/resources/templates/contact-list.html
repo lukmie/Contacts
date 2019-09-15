@@ -33,12 +33,12 @@
 
 
 <!--<form action="#" th:action="@{search}" method="get">-->
-    <!--<div class="input-group input-group-sm mt-3">-->
-        <!--<div class="input-group-prepend">-->
-            <!--<button class="btn btn-outline-info" value="Search">Search</button>-->
-        <!--</div>-->
-        <!--<input type="search" name="firstName" placeholder="First Name" class="form-control" aria-describedby="inputGroup-sizing-sm">-->
-    <!--</div>-->
+<!--<div class="input-group input-group-sm mt-3">-->
+<!--<div class="input-group-prepend">-->
+<!--<button class="btn btn-outline-info" value="Search">Search</button>-->
+<!--</div>-->
+<!--<input type="search" name="firstName" placeholder="First Name" class="form-control" aria-describedby="inputGroup-sizing-sm">-->
+<!--</div>-->
 <!--</form>-->
 
 
@@ -70,15 +70,15 @@
                         </a>
                     </h6>
                     <!--<div class="col">-->
-                        <!--<ul th:each="contact: ${contacts}" th:object="${contact}" class="nav flex-column mb-2">-->
-                            <!--<li class="nav-item">-->
-                                <!--<a href="${updateLink}" class="btn btn-outline-secondary btn-sm">Edit</a>-->
-                            <!--</li>-->
-                            <!--<li class="nav-item">-->
-                                <!--<a href="${updateLink}" class="btn btn-outline-secondary btn-sm">Edit</a>-->
-                            <!--</li>-->
-                            <!--<li class="nav-item"><a th:each="s: ${contact.tags}" href="${updateLink}" th:text="${s.tagName}" class="btn btn-outline-secondary btn-sm">Edit</a></li>-->
-                        <!--</ul>-->
+                    <!--<ul th:each="contact: ${contacts}" th:object="${contact}" class="nav flex-column mb-2">-->
+                    <!--<li class="nav-item">-->
+                    <!--<a href="${updateLink}" class="btn btn-outline-secondary btn-sm">Edit</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                    <!--<a href="${updateLink}" class="btn btn-outline-secondary btn-sm">Edit</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item"><a th:each="s: ${contact.tags}" href="${updateLink}" th:text="${s.tagName}" class="btn btn-outline-secondary btn-sm">Edit</a></li>-->
+                    <!--</ul>-->
                     <!--</div>-->
 
                     <ul th:each="tag: ${tags}" th:object="${tag}" th:remove="all-but-first" class="nav flex-column mb-2">
@@ -162,6 +162,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="dashboard.js"></script></body>
+<script src="dashboard.js"></script>
 </body>
 </html>

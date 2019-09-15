@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public BCryptPasswordEncoder encoder () {
+    public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -20,13 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/register").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/contacts/list").hasRole("USER")
             .and()
-                .formLogin()
-                .loginPage("/loginform")
-                    .defaultSuccessUrl("/contacts/list", true)
-                    .permitAll()
-                .loginProcessingUrl("/processlogin")
-                    .permitAll();
+                .formLogin().loginPage("/login-form").permitAll()
+                .defaultSuccessUrl("/contacts/list", true).permitAll()
+                .loginProcessingUrl("/login").permitAll()
+                .and().headers().frameOptions().sameOrigin();
     }
 }

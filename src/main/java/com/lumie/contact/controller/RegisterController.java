@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
@@ -51,17 +50,12 @@ public class RegisterController {
             return "register-form";
         else {
             userService.addUser(userDto);
-            return "redirect:/loginform";
+            return "redirect:/login-form";
         }
     }
 
-    @GetMapping("/loginform")
+    @GetMapping("/login-form")
     public String loginForm() {
         return "login-form";
     }
-
-//    @PostMapping("/processlogin")
-//    public String mainPage() {
-//        return "/contacts/list";
-//    }
 }

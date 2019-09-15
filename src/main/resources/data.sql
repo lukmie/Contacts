@@ -22,3 +22,6 @@ INSERT INTO usersroles (id_role, name) VALUES
 
 INSERT INTO users (id_user, first_name, last_name, login, password, email, pesel) VALUES
   (1, 'Jan', 'Nowak', 'jan', '$2a$10$aKkykQ/TaABhZUMcVPdD3uJrnT7Ep0dnL9SgGfXXOPtcJOta2Altm', 'jnowak@gmail.com', '91011203366');
+
+INSERT INTO user_role (user_id, role_id) VALUES
+  (1, 1)

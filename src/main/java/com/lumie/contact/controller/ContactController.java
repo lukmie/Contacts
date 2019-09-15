@@ -62,7 +62,6 @@ public class ContactController {
 
     @PostMapping("/saveContact")
     public String saveContact(@ModelAttribute("contact") Contact contact) throws ContactNotFoundException {
-        System.out.println(contact.getTag());
         contactService.saveContact(contact);
         return "redirect:/contacts/list";
     }
