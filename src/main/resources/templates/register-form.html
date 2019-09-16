@@ -15,12 +15,17 @@
 		<div class="offset-md-4 col-sm-4">
 			<div class="text-center">
 				<form class="form-signin" method="post" th:action="@{/register}" th:object="${user}">
-					<h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+					<h1 class="h3 mb-3 font-weight-normal x">Please sign up</h1>
 					<input type="text" th:field="*{firstName}" class="form-control mb-2" placeholder="First Name" required autofocus>
 					<input type="text" th:field="*{lastName}" class="form-control mb-2" placeholder="Last Name" required autofocus>
 					<input type="email" th:field="*{email}" class="form-control mb-2" placeholder="Email" required autofocus>
 					<input type="text" th:field="*{pesel}" class="form-control mb-2" placeholder="Pesel" required autofocus>
-					<input type="text" th:field="*{login}" class="form-control mb-2" placeholder="Username" required autofocus>
+					<div class="form-group" th:classappend="${#fields.hasErrors('login')}? 'has-error':''">
+						<input autofocus class="form-control mb-2" placeholder="Username" required th:field="*{login}"
+							   type="text">
+						<p class="error-message" th:each="error : ${#fields.errors('login')}" th:text="${error}">
+							Validation error</p>
+					</div>
 					<input type="password" th:field="*{password}" class="form-control mb-2" placeholder="Password" required autofocus>
 					<button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Sign up</button>
 					<div class="text-center mt-3">

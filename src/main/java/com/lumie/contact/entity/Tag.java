@@ -13,11 +13,11 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tag")
     private Long id;
-    @Column(name = "tag_name", unique = true, length = 26)
+    @Column(name = "tag_name")
     private String tagName;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {//CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "contact_tag",
             joinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id_tag")},
@@ -58,6 +58,13 @@ public class Tag {
     public void removeContact(Contact contact) {
         contacts.remove(contact);
         contact.getTags().remove(this);
+    }
+
+    public void addContact() {
+        for (Contact contact : contacts) {
+            contact.getTags().add(this);
+        }
+
     }
 
     @Override

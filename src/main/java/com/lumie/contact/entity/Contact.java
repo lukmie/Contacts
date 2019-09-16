@@ -2,7 +2,9 @@ package com.lumie.contact.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "contacts")
@@ -25,7 +27,7 @@ public class Contact {
     private String phoneNumber;
     private String tag;
 
-    @ManyToMany(mappedBy = "contacts",fetch=FetchType.LAZY, cascade= { CascadeType.MERGE, CascadeType.PERSIST,
+    @ManyToMany(mappedBy = "contacts", fetch = FetchType.LAZY, cascade = { //CascadeType.MERGE, CascadeType.PERSIST,
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<Tag> tags = new ArrayList<>();
 

@@ -44,51 +44,81 @@ public class ContactServiceImpl implements ContactService {
 //        Contact contactRepositoryId = contactRepository.findById(contact.getId()).orElseThrow(() -> new ContactNotFoundException("Error"));
         String[] tags = contact.getTag().split("([\\W]+)");
 
+        // work, family
         List<String> tagsFromDB = tagRepository.findAll()
                 .stream()
                 .map(Tag::getTagName)
                 .collect(Collectors.toList());
 
+        // asd, xx, work
         List<String> tagsFromForm = Arrays.stream(tags)
                 .distinct()
                 .collect(Collectors.toList());
 
-        List<String> uniqueTagList = tagsFromForm.stream()
+        // asd, xx
+        List<Tag> uniqueTagList = tagsFromForm.stream()
                 .filter(l -> !tagsFromDB.contains(l))
+                .map(t -> {
+                    Tag tag = new Tag();
+                    tag.setTagName(t.toUpperCase());
+                    return tag;
+                }).collect(Collectors.toList());
+
+        // work
+        List<Tag> existingDBTagList = tagsFromForm.stream()
+                .filter(l -> tagsFromDB.contains(l))
+                .map(t -> tagRepository.findByTagName(t))
                 .collect(Collectors.toList());
 
         if (!uniqueTagList.isEmpty()) {
-            for (String s : uniqueTagList) {
-                Tag tag = new Tag();
-                tag.setTagName(s);
-                tag.getContacts().add(contact);
-//                    contact.getTags().add(tag);
-                tagRepository.save(tag);
-            }
-        } else {
-            contact.setTags(tagsFromForm.stream().map(t -> {
-            Tag tag1 = new Tag();
-            tag1.setTagName(t.toUpperCase());
-                tag1.getContacts().add(contact);
-            return tag1;
-            }).collect(Collectors.toList()));
-
+            uniqueTagList.forEach(t -> contact.getTags().add(t));
+            uniqueTagList.forEach(t -> t.getContacts().add(contact));
+            contactRepository.save(contact);
+            uniqueTagList.forEach(t -> tagRepository.save(t));
         }
 
-        tagsFromForm.stream().map(t -> {
-            Tag tag1 = new Tag();
-            tag1.setTagName(t.toUpperCase());
-            return tag1;
-        }).collect(Collectors.toList());
+        if (!existingDBTagList.isEmpty()) {
+            existingDBTagList.forEach(t -> contact.getTags().add(t));
+            existingDBTagList.forEach(t -> t.getContacts().add(contact));
+            contactRepository.save(contact);
+        }
 
-//        contact.setTags(tagsFromForm.stream().map(t -> {
+        System.out.println("================================================= uniqueTagList" + uniqueTagList);
+        System.out.println("************************************************* existingDBTagList" + existingDBTagList);
+
+        /*
+        String s = tagsFromForm.get(0);
+        Tag tag = new Tag();
+        tag.setTagName(s);
+//        tag.addContact();
+        Tag byTagName = tagRepository.findByTagName(s);
+        byTagName.getContacts().add(contact);
+        contact.getTags().add(byTagName);
+        contactRepository.save(contact);
+        tagRepository.save(byTagName);
+         */
+
+//        if (!uniqueTagList.isEmpty()) {
+//            for (String s : uniqueTagList) {
+//                Tag tag = new Tag();
+//                tag.setTagName(s);
+//                tag.getContacts().add(contact);
+//                tagRepository.save(tag);
+//            }
+//        } else {
+//            contact.setTags(tagsFromForm.stream().map(t -> {
+//            Tag tag1 = new Tag();
+//            tag1.setTagName(t.toUpperCase());
+//                tag1.getContacts().add(contact);
+//            return tag1;
+//            }).collect(Collectors.toList()));
+//        }
+//
+//        List<Tag> collect = tagsFromForm.stream().map(t -> {
 //            Tag tag1 = new Tag();
 //            tag1.setTagName(t.toUpperCase());
 //            return tag1;
-//        }).collect(Collectors.toList()));
-
-//        contact.addTag();
-        contactRepository.save(contact);
+//        }).collect(Collectors.toList());
     }
 
     @Override

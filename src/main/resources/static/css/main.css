@@ -3,10 +3,7 @@
     padding: 0;
 }
 
-.left {
-    background-color: aqua;
-}
 
-.right {
-    background-color: red;
+.error-message {
+    color: #a94442;
 }

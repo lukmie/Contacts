@@ -32,30 +32,16 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String addUser(@ModelAttribute @Valid UserRegistrationDto userDto, BindingResult bindResult) throws LoginAlreadyExistException, EmailAlreadyExistException {
-//        if(bindResult.hasErrors())
-//            return "registerform";
-//        else {
-//            User registered = null;
-//            try {
-//                registered = userService.addUser(userDto);
-//            } catch (EmailAlreadyExistException | LoginAlreadyExistException e) {
-//                e.printStackTrace();
-//                return "registerform";
-//            }
-//        }
-//        return "redirect:/loginform";
+    public String addUser(@ModelAttribute("user") @Valid UserRegistrationDto userDto, BindingResult bindResult) throws LoginAlreadyExistException, EmailAlreadyExistException {
+        if (userService.findByLogin(userDto.getLogin()).isPresent()) {
+            bindResult.rejectValue("login", null, "Account with this login already exist.");
+        }
 
-        if(bindResult.hasErrors())
+        if (bindResult.hasErrors())
             return "register-form";
         else {
             userService.addUser(userDto);
             return "redirect:/login-form";
         }
-    }
-
-    @GetMapping("/login-form")
-    public String loginForm() {
-        return "login-form";
     }
 }
